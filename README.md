@@ -33,7 +33,7 @@ observable$.pipe(
 
 ## Bugs & Features
 
-Any issues, requests for a new feature, etc. can be filled using [GitHub Issues](https://github.com/Jamsek-m/ts-prog-utils/issues).
+Any issues, requests for a new feature, etc. can be filled using [GitHub Issues](https://github.com/Jamsek-m/prog-lib-rxjs/issues).
 
 ## License
 
