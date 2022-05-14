@@ -1,5 +1,4 @@
-import { map } from "rxjs/operators";
-import { Observable } from "rxjs/dist/types";
+import { map, Observable } from "rxjs";
 
 /**
  * Asserts observable type is of type <code>T</code>.
