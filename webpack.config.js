@@ -12,9 +12,19 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].js",
-        library: "RXJSUtils",
-        libraryTarget: "umd",
+        library: {
+            name: "RXJSUtils",
+            type: "umd"
+        },
         globalObject: "this"
+    },
+    externals: {
+        rxjs: {
+            commonjs: "rxjs",
+            commonjs2: "rxjs",
+            amd: "rxjs",
+            root: "_",
+        }
     },
     resolve: {
         extensions: [
