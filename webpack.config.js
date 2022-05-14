@@ -13,7 +13,6 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].js",
         library: {
-            // name: "RXJSUtils",
             type: "module"
         },
         globalObject: "this"
