@@ -31,6 +31,30 @@ observable$.pipe(
 );
 ```
 
+#### Enforce type
+
+`enforceType<T>()` runs a type guard check on observable to enforce it is of type `T`. Usage:
+
+```typescript
+function isString(x: unknown): x is string {
+    return typeof x === "string";
+}
+
+observable$.pipe(
+    enforceType<string>(isString),
+);
+```
+
+You can also create reusable enforcers, by using `createTypeEnforcer` function:
+
+```typescript
+const enforceString = createTypeEnforcer(isString);
+
+observable$.pipe(
+    enforceString(),
+);
+```
+
 ## Bugs & Features
 
 Any issues, requests for a new feature, etc. can be filled using [GitHub Issues](https://github.com/Jamsek-m/prog-lib-rxjs/issues).
