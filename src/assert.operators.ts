@@ -1,4 +1,4 @@
-import { map, Observable, of } from "rxjs";
+import { filter, map, Observable } from "rxjs";
 import { TypeGuardFunc } from "./types";
 
 /**
@@ -19,6 +19,31 @@ export function assertVoid() {
     return function <T>(source: Observable<T>): Observable<void> {
         return source.pipe(
             map(() => undefined)
+        );
+    };
+}
+
+/**
+ * Enforces that given value is not null and emits only if it is not null.
+ */
+export function nonNull<T>() {
+    return function <T>(source: Observable<T | null>): Observable<T> {
+        return source.pipe(
+            filter((value: T | null) => value !== null),
+            assertType<T>(),
+        );
+    };
+}
+
+/**
+ * Enforces that given value passes given type guard, by emitting only if value passes type guard.
+ * @param guard type guard function for given type
+ */
+export function ofTypeOnly<T>(guard: TypeGuardFunc<T>) {
+    return function <I>(source: Observable<I>): Observable<T> {
+        return source.pipe(
+            filter((value: I) => guard(value)),
+            assertType<T>(),
         );
     };
 }
@@ -48,5 +73,15 @@ export function enforceType<T>(guard: TypeGuardFunc<T>) {
 export function createTypeEnforcer<T>(guard: TypeGuardFunc<T>) {
     return () => {
         return enforceType(guard);
+    };
+}
+
+/**
+ * Creates reusable type-enforcing filter operator
+ * @param guard type guard function for given type
+ */
+export function createTypeFilter<T>(guard: TypeGuardFunc<T>) {
+    return () => {
+        return ofTypeOnly(guard);
     };
 }
