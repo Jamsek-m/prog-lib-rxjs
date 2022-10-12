@@ -31,6 +31,40 @@ observable$.pipe(
 );
 ```
 
+#### Assert non null
+
+`nonNull()` asserts observable value is not null. Usage: 
+
+```typescript
+observable$.pipe(
+    nonNull(),
+);
+```
+
+#### Type filter
+
+`ofTypeOnly<T>()` runs a type guard check on observable to filter values that are not of type `T`. Usage:
+
+```typescript
+function isString(x: unknown): x is string {
+    return typeof x === "string";
+}
+
+observable$.pipe(
+    ofTypeOnly<string>(isString),
+);
+```
+
+You can also create reusable filters, by using `createTypeFilter` function:
+
+```typescript
+const enforceString = createTypeFilter(isString);
+
+observable$.pipe(
+    enforceString(),
+);
+```
+ 
 #### Enforce type
 
 `enforceType<T>()` runs a type guard check on observable to enforce it is of type `T`. Usage:
