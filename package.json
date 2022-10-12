@@ -1,6 +1,6 @@
 {
     "name": "@mjamsek/rxjs-utils",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Utility library providing RxJS operators.",
     "keywords": [
         "mjamsek",
